@@ -1,5 +1,10 @@
 package com.eazybytes.accounts.dto;
 
-public class CustomerDTO {
+import lombok.Data;
 
+@Data
+public class CustomerDTO {
+    private String name;
+    private String email;
+    private String mobileNumber;
 }
