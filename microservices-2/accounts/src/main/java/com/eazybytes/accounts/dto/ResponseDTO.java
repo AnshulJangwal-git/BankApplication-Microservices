@@ -10,5 +10,5 @@ import lombok.NoArgsConstructor;
 public class ResponseDTO {
     private String statusCode;
     private String statusMsg;
-    
+
 }
