@@ -4,13 +4,12 @@ import com.eazybytes.accounts.constants.AccountsConstants;
 import com.eazybytes.accounts.dto.CustomerDTO;
 import com.eazybytes.accounts.entity.Accounts;
 import com.eazybytes.accounts.entity.Customer;
-import com.eazybytes.accounts.exceptions.CustomerAlreadyExistsException;
+import com.eazybytes.accounts.exception.CustomerAlreadyExistsException;
 import com.eazybytes.accounts.mappers.CustomerMapper;
 import com.eazybytes.accounts.repository.AccountsRepository;
 import com.eazybytes.accounts.repository.CustomerRepository;
 import com.eazybytes.accounts.service.AccountsService;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
