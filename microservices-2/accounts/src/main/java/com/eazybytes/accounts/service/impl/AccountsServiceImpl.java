@@ -10,8 +10,10 @@ import com.eazybytes.accounts.repository.AccountsRepository;
 import com.eazybytes.accounts.repository.CustomerRepository;
 import com.eazybytes.accounts.service.AccountsService;
 import lombok.AllArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.Optional;
 import java.util.Random;
 
@@ -31,10 +33,16 @@ public class AccountsServiceImpl implements AccountsService {
             throw new CustomerAlreadyExistsException("Customer Already registered with given " +
                     "mobileNumber: "+ customerDTO.getMobileNumber());
         }
-
+        customer.setCreatedAt(LocalDateTime.now());
+        customer.setCreatedBy("Anonymous");
         Customer savedCustomer = customerRepository.save(customer);
         accountsRepository.save(createNewAccount(savedCustomer));
 
+    }
+
+    @Override
+    public CustomerDTO fetchAccount(String mobileNumber) {
+        return null;
     }
 
     private Accounts createNewAccount(Customer customer) {
@@ -45,6 +53,8 @@ public class AccountsServiceImpl implements AccountsService {
         newAccount.setAccountNumber(randomAccNumber);
         newAccount.setAccountType(AccountsConstants.SAVINGS);
         newAccount.setBranchAddress(AccountsConstants.ADDRESS);
+        newAccount.setCreatedAt(LocalDateTime.now());
+        newAccount.setCreatedBy("Anonymous");
         return newAccount;
     }
 
