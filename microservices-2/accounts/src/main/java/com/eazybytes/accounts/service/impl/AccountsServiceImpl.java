@@ -5,6 +5,7 @@ import com.eazybytes.accounts.dto.CustomerDTO;
 import com.eazybytes.accounts.entity.Accounts;
 import com.eazybytes.accounts.entity.Customer;
 import com.eazybytes.accounts.exception.CustomerAlreadyExistsException;
+import com.eazybytes.accounts.exception.ResourceNotFoundException;
 import com.eazybytes.accounts.mappers.CustomerMapper;
 import com.eazybytes.accounts.repository.AccountsRepository;
 import com.eazybytes.accounts.repository.CustomerRepository;
@@ -12,6 +13,7 @@ import com.eazybytes.accounts.service.AccountsService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.time.LocalDateTime;
 import java.util.Optional;
@@ -55,6 +57,18 @@ public class AccountsServiceImpl implements AccountsService {
 
     @Override
     public CustomerDTO fetchAccount(String mobileNumber) {
+        Customer customer = customerRepository.findByMobileNumber(mobileNumber)
+                .orElseThrow(
+                        () -> new ResourceNotFoundException("Customer", "mobileNumber", mobileNumber)
+                );
+
+        Accounts account = accountsRepository.findByCustomerId(customer.getCustomerId())
+                .orElseThrow(
+                        () -> new ResourceNotFoundException("Account", "customerId",
+                                customer.getCustomerId().toString())
+                );
+
+        
 
         return null;
     }
