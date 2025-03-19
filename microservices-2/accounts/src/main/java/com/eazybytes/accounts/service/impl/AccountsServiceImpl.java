@@ -40,11 +40,6 @@ public class AccountsServiceImpl implements AccountsService {
 
     }
 
-    @Override
-    public CustomerDTO fetchAccount(String mobileNumber) {
-        return null;
-    }
-
     private Accounts createNewAccount(Customer customer) {
         Accounts newAccount = new Accounts();
         newAccount.setCustomerId(customer.getCustomerId());
@@ -56,6 +51,12 @@ public class AccountsServiceImpl implements AccountsService {
         newAccount.setCreatedAt(LocalDateTime.now());
         newAccount.setCreatedBy("Anonymous");
         return newAccount;
+    }
+
+    @Override
+    public CustomerDTO fetchAccount(String mobileNumber) {
+
+        return null;
     }
 
 
