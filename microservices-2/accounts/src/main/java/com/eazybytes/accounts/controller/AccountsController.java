@@ -5,6 +5,7 @@ import com.eazybytes.accounts.dto.CustomerDTO;
 import com.eazybytes.accounts.dto.ResponseDTO;
 import com.eazybytes.accounts.service.AccountsService;
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.Pattern;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -29,7 +30,9 @@ public class AccountsController {
                 .body(new ResponseDTO(AccountsConstants.STATUS_201, AccountsConstants.MESSAGE_201));
     }
     @GetMapping("/fetch")
-    public ResponseEntity<CustomerDTO> fetchAccountDetails(@RequestParam String mobileNumber){
+    public ResponseEntity<CustomerDTO> fetchAccountDetails(@RequestParam
+                           @Pattern(regexp = "[0-9]{10}", message = "Mobile Number must be exactly 10 digits")
+                           String mobileNumber){
         CustomerDTO customerDTO = accountsService.fetchAccount(mobileNumber);
 
         return ResponseEntity
@@ -53,7 +56,9 @@ public class AccountsController {
     }
 
     @DeleteMapping("/delete")
-    public ResponseEntity<ResponseDTO> deleteAccountDetails(@RequestParam String mobileNumber){
+    public ResponseEntity<ResponseDTO> deleteAccountDetails(@RequestParam
+                        @Pattern(regexp = "[0-9]{10}", message = "Account Number must be exactly 10 digits")
+                        String mobileNumber){
         boolean isDeleted = accountsService.deleteAccount(mobileNumber);
         if(isDeleted){
             return ResponseEntity
