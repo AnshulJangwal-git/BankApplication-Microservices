@@ -76,5 +76,11 @@ public class AccountsServiceImpl implements AccountsService {
         return customerDTO;
     }
 
+    @Override
+    public boolean updateAccount(CustomerDTO customerDTO) {
+
+        return false;
+    }
+
 
 }
