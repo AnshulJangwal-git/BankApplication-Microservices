@@ -10,17 +10,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping(value = "/api", produces = MediaType.APPLICATION_JSON_VALUE)
 @AllArgsConstructor
+@Validated
 public class AccountsController {
 
     private AccountsService accountsService;
 
     @PostMapping("/create")
-    public ResponseEntity<ResponseDTO> createAccount(@RequestBody CustomerDTO customerDTO){
+    public ResponseEntity<ResponseDTO> createAccount(@Valid@RequestBody CustomerDTO customerDTO){
         accountsService.createAccount(customerDTO);
         return ResponseEntity
                 .status(HttpStatus.CREATED)
@@ -36,7 +38,7 @@ public class AccountsController {
     }
 
     @PutMapping("/update")
-    public ResponseEntity<ResponseDTO> updateAccountDetails(@RequestBody CustomerDTO customerDTO){
+    public ResponseEntity<ResponseDTO> updateAccountDetails(@Valid@RequestBody CustomerDTO customerDTO){
         boolean isUpdated = accountsService.updateAccount(customerDTO);
 
         if(isUpdated) {
