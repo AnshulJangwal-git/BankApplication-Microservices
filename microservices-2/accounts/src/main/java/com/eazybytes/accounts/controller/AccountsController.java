@@ -4,6 +4,8 @@ import com.eazybytes.accounts.constants.AccountsConstants;
 import com.eazybytes.accounts.dto.CustomerDTO;
 import com.eazybytes.accounts.dto.ResponseDTO;
 import com.eazybytes.accounts.service.AccountsService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Pattern;
@@ -27,6 +29,14 @@ public class AccountsController {
 
     private AccountsService accountsService;
 
+    @Operation(
+            summary = "Create Account REST API",
+            description = "REST API to create new Customer & Account inside EazyBank"
+    )
+    @ApiResponse(
+            responseCode = "201",
+            description = "HTTP Status CREATED"
+    )
     @PostMapping("/create")
     public ResponseEntity<ResponseDTO> createAccount(@Valid@RequestBody CustomerDTO customerDTO){
         accountsService.createAccount(customerDTO);
