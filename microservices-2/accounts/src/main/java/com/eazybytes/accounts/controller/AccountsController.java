@@ -2,9 +2,12 @@ package com.eazybytes.accounts.controller;
 
 import com.eazybytes.accounts.constants.AccountsConstants;
 import com.eazybytes.accounts.dto.CustomerDTO;
+import com.eazybytes.accounts.dto.ErrorResponseDTO;
 import com.eazybytes.accounts.dto.ResponseDTO;
 import com.eazybytes.accounts.service.AccountsService;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -76,7 +79,10 @@ public class AccountsController {
         ),
         @ApiResponse(
                 responseCode = "500",
-                description = "HTTP Status INTERNAL_SERVER_ERROR"
+                description = "HTTP Status INTERNAL_SERVER_ERROR",
+                content = @Content(
+                        schema = @Schema(implementation = ErrorResponseDTO.class)
+                )
         )
     })
     @PutMapping("/update")
