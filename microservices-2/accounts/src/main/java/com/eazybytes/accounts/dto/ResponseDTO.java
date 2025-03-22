@@ -13,12 +13,12 @@ import lombok.Data;
 public class ResponseDTO {
 
     @Schema(
-            description = "Status code of the EazyBank Account", example = "200"
+            description = "Status code of the EazyBank Account"
     )
     private String statusCode;
 
     @Schema(
-            description = "Status message of the EazyBank Account", example = "Request Processed Successfully"
+            description = "Status message of the EazyBank Account"
     )
     private String statusMsg;
 }
