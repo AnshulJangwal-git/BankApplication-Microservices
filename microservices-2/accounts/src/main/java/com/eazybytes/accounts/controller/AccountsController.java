@@ -45,6 +45,15 @@ public class AccountsController {
                 .status(HttpStatus.CREATED)
                 .body(new ResponseDTO(AccountsConstants.STATUS_201, AccountsConstants.MESSAGE_201));
     }
+
+    @Operation(
+            summary = "Fetch Account REST API",
+            description = "REST API to create new Customer & Account inside EazyBank"
+    )
+    @ApiResponse(
+            responseCode = "200",
+            description = "HTTP Status OK"
+    )
     @GetMapping("/fetch")
     public ResponseEntity<CustomerDTO> fetchAccountDetails(@RequestParam
                            @Pattern(regexp = "[0-9]{10}", message = "Mobile Number must be exactly 10 digits")
