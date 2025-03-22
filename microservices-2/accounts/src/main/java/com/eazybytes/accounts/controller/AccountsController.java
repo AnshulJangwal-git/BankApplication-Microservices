@@ -6,6 +6,7 @@ import com.eazybytes.accounts.dto.ResponseDTO;
 import com.eazybytes.accounts.service.AccountsService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Pattern;
@@ -55,6 +56,20 @@ public class AccountsController {
                 .body(customerDTO);
     }
 
+    @Operation(
+            summary = "Update Account REST API",
+            description = "REST API to update new Customer & Account inside EazyBank"
+    )
+    @ApiResponses({
+        @ApiResponse(
+                responseCode = "200",
+                description = "HTTP Status OK"
+        ),
+        @ApiResponse(
+                responseCode = "500",
+                description = "HTTP Status INTERNAL_SERVER_ERROR"
+        )
+    })
     @PutMapping("/update")
     public ResponseEntity<ResponseDTO> updateAccountDetails(@Valid@RequestBody CustomerDTO customerDTO){
         boolean isUpdated = accountsService.updateAccount(customerDTO);
