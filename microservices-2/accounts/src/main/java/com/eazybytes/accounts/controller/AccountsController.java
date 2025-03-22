@@ -85,6 +85,20 @@ public class AccountsController {
         }
     }
 
+    @Operation(
+            summary = "Delete Account REST API",
+            description = "REST API to delete new Customer & Account inside EazyBank"
+    )
+    @ApiResponses({
+            @ApiResponse(
+                    responseCode = "200",
+                    description = "HTTP Status OK"
+            ),
+            @ApiResponse(
+                    responseCode = "500",
+                    description = "HTTP Status INTERNAL_SERVER_ERROR"
+            )
+    })
     @DeleteMapping("/delete")
     public ResponseEntity<ResponseDTO> deleteAccountDetails(@RequestParam
                         @Pattern(regexp = "[0-9]{10}", message = "Account Number must be exactly 10 digits")
